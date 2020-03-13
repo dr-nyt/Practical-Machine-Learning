@@ -8,10 +8,12 @@ int sign(float n) {
 }
 
 class Perceptron {
-  float[] weights = new float[2];
+  float[] weights;
   float LR = 0.1;    // Learning Rate
    
-  Perceptron() {
+  Perceptron(int n) {
+    weights = new float[n];
+    
     for(int i = 0; i < weights.length; i++) {
       weights[i] = random(-1, 1);
     }
@@ -24,6 +26,14 @@ class Perceptron {
     }
     int output = sign(sum);
     return output;
+  }
+  
+  float guessY(float x) {
+     float w0 = weights[0];
+     float w1 = weights[1];
+     float w2 = weights[2];
+     
+     return - (w2 / w1) - (w0 / w1) * x;
   }
   
   void train(float[] inputs, int target) {
